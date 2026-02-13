@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".ui.home.HomeFragment"
+    >
+
+    <TextView
+        android:id="@+id/lblHealth"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="My Health"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:id="@+id/lblHealthQuestion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="5dp"
+        android:text="Welcome Chris, how are you feeling today?"
+        android:layout_below="@id/lblHealth"
+        />
+
+    <LinearLayout
+        android:id="@+id/layoutHealthOptions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal"
+        android:layout_below="@id/lblHealthQuestion"
+        android:layout_weight="1"
+        android:gravity="center" >
+        >
+
+        <Button
+            android:id="@+id/btnWell"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="5dp"
+            android:backgroundTint="#4CAF50"
+            android:text="Doing Well" />
+
+        <Button
+            android:id="@+id/btnUnwell"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="2dp"
+            android:backgroundTint="@color/yellow"
+            android:text="Not Good" />
+
+        <Button
+            android:id="@+id/btnInfected"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="5dp"
+            android:backgroundTint="@color/red"
+            android:text="Infected" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/lblCovidStatistics"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/layoutHealthOptions"
+        android:text="COVID Statistics (USA)"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        />
+
+    <LinearLayout
+        android:id="@+id/layoutTotalCases"
+        android:layout_marginBottom="10dp"
+        android:layout_below="@id/lblCovidStatistics"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        >
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/eo_coronavirus"
+            app:tint="@color/red"
+            />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:id="@+id/lblTotalConfirmedCases"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="100"
+                android:textSize="30dp"
+                android:textStyle="bold"
+
+                />
+
+            <TextView
+                android:id="@+id/lblTotalConfirmedCasesMessage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total Confirmed Cases"
+                android:textSize="20dp"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutTotalRecovered"
+        android:layout_marginBottom="10dp"
+        android:layout_below="@id/layoutTotalCases"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        >
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/eo_cross"
+            app:tint="#2C41A6"
+            />
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:id="@+id/lblTotalRecovered"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="100"
+                android:textSize="30dp"
+                android:textStyle="bold"
+
+                />
+
+            <TextView
+                android:id="@+id/lblTotalRecoveredMessage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total Recovered"
+                android:textSize="20dp"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutTotalDeaths"
+        android:layout_marginBottom="10dp"
+        android:layout_below="@id/layoutTotalRecovered"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        >
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginHorizontal="5dp"
+            android:src="@drawable/eo_bed"
+            app:tint="#673AB7"
+            />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:id="@+id/lblTotalDeaths"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="100"
+                android:textSize="30dp"
+                android:textStyle="bold"
+
+                />
+
+            <TextView
+                android:id="@+id/lblTotalDeathsMessage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total Deaths"
+                android:textSize="20dp"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/lblLatestNews"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layoutTotalDeaths"
+        android:text="@string/latest_news_label"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/idRVNews"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_below="@id/lblLatestNews"
+        android:background="@android:color/white"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="10dp"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/news_rv_item"
+        />
+
+    <TextView
+        android:id="@+id/lblOutbreakUpdates"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/idRVNews"
+        android:text="@string/outbreak_updates_label"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        />
+
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/statsChart"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_below="@id/lblOutbreakUpdates"
+        />
+
+    <TextView
+        android:id="@+id/lblFavoriteDestinations"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/statsChart"
+        android:layout_marginTop="10dp"
+        android:text="@string/favorite_destinations_label"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        />
+
+<!--    <androidx.recyclerview.widget.RecyclerView-->
+<!--        android:id="@+id/rvFavoriteDestinations"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@id/lblFavoriteDestinations"-->
+<!--        android:orientation="vertical"-->
+<!--        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
+<!--        tools:listitem="@layout/destination_item_layout"-->
+<!--    />-->
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvFavoritePlaces"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp" />
+
+    <fragment
+        android:name="com.example.newsapplication.FavPlaceFragment"
+        android:id="@+id/fragmentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/lblFavoriteDestinations"
+        android:padding="20dp" />
+
+</RelativeLayout>

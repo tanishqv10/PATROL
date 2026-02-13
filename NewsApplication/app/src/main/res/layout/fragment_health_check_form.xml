@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    tools:context=".HealthCheckFormFragment"
+    >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/lblHealthAssessment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="15dp"
+                    android:textAlignment="center"
+                    android:text="Health Assessment"
+                    android:textSize="22sp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/textViewTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/lblHealthAssessment"
+                    android:text="@string/questionnaire_label"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
+
+                <CheckBox
+                    android:id="@+id/checkBoxCovidPositive"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/textViewTitle"
+                    android:text="@string/covid_positive_question" />
+
+                <CheckBox
+                    android:id="@+id/checkBoxCovidExposed"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/checkBoxCovidPositive"
+                    android:text="@string/covid_exposed_question" />
+
+                <TextView
+                    android:id="@+id/textViewSymptoms"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/checkBoxCovidExposed"
+                    android:text="@string/symptoms_label"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
+
+                <!-- List other symptoms as CheckBoxes -->
+                <CheckBox
+                    android:id="@+id/checkBoxFever"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/textViewSymptoms"
+                    android:text="@string/fever_symptom" />
+                <CheckBox
+                    android:id="@+id/checkBoxHeadache"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/checkBoxFever"
+                    android:text="@string/headache_symptom" />
+                <CheckBox
+                    android:id="@+id/checkBoxSoreThroat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/checkBoxHeadache"
+                    android:text="@string/sore_throat_symptom" />
+                <CheckBox
+                    android:id="@+id/checkBoxNausea"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/checkBoxSoreThroat"
+                    android:text="@string/nausea_symptom" />
+                <CheckBox
+                    android:id="@+id/checkBoxFatigue"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/checkBoxNausea"
+                    android:text="@string/fatigue_symptom" />
+                <!-- Add more CheckBoxes for other symptoms like Headache, Sore Throat, etc. -->
+
+                <TextView
+                    android:id="@+id/lblOtherSymptoms"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/checkBoxFatigue"
+                    android:text="@string/other_symptoms_label"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
+
+                <EditText
+                    android:id="@+id/txtOtherSymptoms"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/lblOtherSymptoms"
+                    android:inputType="text"
+                    android:autofillHints=""
+                    android:hint="@string/other_symptoms_hint"/>
+
+                <!-- Footer Navigation if needed -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtOtherSymptoms"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/btnHealth"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginVertical="10dp"
+                            android:layout_marginRight="10dp"
+                            android:backgroundTint="@color/grey"
+                            android:layout_gravity="center"
+                            android:text="Health Stats" />
+
+                        <Button
+                            android:id="@+id/btnSubmit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginVertical="10dp"
+                            android:backgroundTint="@color/yellow"
+                            android:layout_gravity="center"
+                            android:text="@string/submit_button" />
+
+                </LinearLayout>
+
+
+
+        </LinearLayout>
+
+
+</RelativeLayout>

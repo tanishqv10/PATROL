@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".HealthStatusFragment"
+    android:background="@android:color/white"
+    >
+
+    <TextView
+        android:id="@+id/lblHealth"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="My Health - Self Reporting"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        />
+
+    <LinearLayout
+        android:id="@+id/layoutHealthOptions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal"
+        android:layout_below="@id/lblHealth"
+        android:layout_weight="1"
+        android:gravity="center" >
+        >
+
+        <Button
+            android:id="@+id/btnWell"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="5dp"
+            android:backgroundTint="#4CAF50"
+            android:text="Doing Well" />
+
+        <Button
+            android:id="@+id/btnUnwell"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="2dp"
+            android:backgroundTint="@color/yellow"
+            android:text="Not Good" />
+
+        <Button
+            android:id="@+id/btnInfected"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="5dp"
+            android:backgroundTint="@color/red"
+            android:text="Infected" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/lblLatestCheckin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/layoutHealthOptions"
+        android:text="@string/latest_checkins_label"
+        android:textSize="18dp"
+        android:textStyle="bold"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/idRVLatestCheckins"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/lblLatestCheckin"
+        android:layout_marginTop="5dp"
+        android:orientation="vertical"
+        android:visibility="visible"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/checkin_rv_item" />
+
+</RelativeLayout>
