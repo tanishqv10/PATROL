@@ -16,9 +16,9 @@ const { MongoClient, ServerApiVersion } = require('mongodb');
 const uri = "mongodb+srv://tvarshne:44332211%40Tanishq@maincluster.c6exvxp.mongodb.net/?retryWrites=true&w=majority&appName=MainCluster";
 const client = new MongoClient(uri, {
     serverApi: {
-      version: ServerApiVersion.v1,
-      strict: true,
-      deprecationErrors: true,
+        version: ServerApiVersion.v1,
+        strict: true,
+        deprecationErrors: true,
     }
 });
 
@@ -28,7 +28,7 @@ function genPassword(length) {
     const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()';
     let result = '';
     for (let i = 0; i < length; i++) {
-      result += chars.charAt(Math.floor(Math.random() * chars.length));
+        result += chars.charAt(Math.floor(Math.random() * chars.length));
     }
     return result;
 }
@@ -36,15 +36,15 @@ function genPassword(length) {
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: 'tanishqtemp10@gmail.com',
-      pass: 'ikne vgsw rtrt pgww'
+        user: 'tanishqtemp10@gmail.com',
+        pass: 'ikne vgsw rtrt pgww'
     }
 });
 
 client.connect()
     .then(() => {
         console.log("Connected successfully to MongoDB");
-        
+
         const database = client.db("androidApp");
         const users = database.collection("userDetails");
 
@@ -60,7 +60,7 @@ client.connect()
                     return res.status(409).json({ message: 'A user with this email already exists.' });
                 }
                 const hashedPassword = await bcrypt.hash(password, 10);
-                const result = await users.insertOne({  email: email, password: hashedPassword, fname: fname, lname: lname, dob: dob, city: city, phone: phone });
+                const result = await users.insertOne({ email: email, password: hashedPassword, fname: fname, lname: lname, dob: dob, city: city, phone: phone });
                 res.status(201).json(result);
             } catch (error) {
                 console.error(error);
@@ -70,7 +70,7 @@ client.connect()
 
         server.get('/getUserDetails', async (req, res) => {
             const email = req.query.email;
-        
+
             try {
                 const user = await users.findOne({ email: email });
                 if (user) {
@@ -86,7 +86,7 @@ client.connect()
 
         server.get('/getHealthStatus', async (req, res) => {
             const email = req.query.email;
-        
+
             try {
                 const user = await users.findOne({ email: email });
                 if (user) {
@@ -99,7 +99,7 @@ client.connect()
                 res.status(500).json({ message: 'Error retrieving user from the database', error: error });
             }
         });
-        
+
 
         server.post('/updateProfile', async (req, res) => {
             const { email, city, phone } = req.body;
@@ -124,8 +124,8 @@ client.connect()
             } catch (error) {
                 console.error(error);
                 res.status(500).json({ message: 'Error updating the password', error: error });
-            }
-        });
+            }
+        });
 
         server.post('/login', async (req, res) => {
             const { email, password } = req.body;
@@ -149,11 +149,11 @@ client.connect()
                 res.status(500).json({ message: 'Error connecting to the database', error: error });
             }
         });
-        
+
         server.post('/favPlaces', async (req, res) => {
             const { email, favoritePlace } = req.body;
 
-            console.log("--------------------------",req.body);
+            console.log("--------------------------", req.body);
             try {
                 const user = await users.findOne({ email: email });
                 if (user) {
@@ -176,8 +176,8 @@ client.connect()
         });
 
         server.get('/getFavPlaces', async (req, res) => {
-            const { email } = req.query; 
-            console.log("--------------------------------------------------",email,"-----------------------------------------------")
+            const { email } = req.query;
+            console.log("--------------------------------------------------", email, "-----------------------------------------------")
             try {
                 const user = await users.findOne({ email: email });
                 if (user) {
@@ -191,7 +191,7 @@ client.connect()
                 res.status(500).json({ message: 'Error fetching from the database', error: error });
             }
         });
-        
+
 
         server.post('/resetPassword', async (req, res) => {
             const randomString = genPassword(12);
@@ -206,8 +206,8 @@ client.connect()
                         subject: 'Attention: requested new password',
                         text: `Here is your temporary password: ${randomString}. This password will expire in next 7 days. \nDon't forget to change the password by clicking on your profile image.`
                     };
-                    
-                    transporter.sendMail(mailOptions, function(error, info){
+
+                    transporter.sendMail(mailOptions, function (error, info) {
                         if (error) {
                             console.log(error);
                             res.send('Error sending email');
@@ -276,7 +276,7 @@ client.connect()
                 if (user) {
                     const result = await users.updateOne(
                         { email: email },
-                        { $push: { healthStatus: { ...healthStatus, ts: new Date() } } }                    );
+                        { $push: { healthStatus: { ...healthStatus, ts: new Date() } } });
                     if (result.modifiedCount === 1) {
                         res.status(200).json({ message: 'Health Status updated!' });
                     } else {
@@ -288,7 +288,7 @@ client.connect()
             } catch (error) {
                 console.error(error);
                 res.status(500).json({ message: 'Error updating the password', error: error });
-            }            
+            }
         });
 
         //stats rapid api
@@ -300,7 +300,7 @@ client.connect()
                     method: 'GET',
                     url: 'https://covid-19-tracking.p.rapidapi.com/v1/' + country,
                     headers: {
-                        'X-RapidAPI-Key': '8a9b47a55fmsh96132105abd8678p138694jsn437b7adad850',
+                        'X-RapidAPI-Key': process.env.RAPID_API_KEY,
                         'X-RapidAPI-Host': 'covid-19-tracking.p.rapidapi.com'
                     }
                 };
@@ -324,7 +324,7 @@ client.connect()
 
             // console.log("GET /healthStatus");
 
-            const email  = req.query.email;
+            const email = req.query.email;
 
             if (!email) {
                 return res.status(400).json({ message: 'Email parameter is required' });
@@ -336,11 +336,11 @@ client.connect()
                 if (user && user.healthStatus) {
                     user.healthStatus.sort((a, b) => b.ts - a.ts);
                 }
-                 // Limit the sorted array to 12 elements
+                // Limit the sorted array to 12 elements
                 user.healthStatus = user.healthStatus.slice(0, 12);
                 console.log(user);
                 if (user && user.healthStatus) {
-                    res.status(200).json({"healthStatuses": user.healthStatus});
+                    res.status(200).json({ "healthStatuses": user.healthStatus });
                 } else {
                     res.status(404).json({ message: "User not found" });
                 }
@@ -348,33 +348,33 @@ client.connect()
             } catch (error) {
                 console.error(error);
                 res.status(500).json({ message: 'Error updating the password', error: error });
-            }      
+            }
         });
-        
+
         // stats
         server.get('/stats', async (req, res) => {
             const country = 'united states';
             try {
                 const response = await axios.get('https://api.api-ninjas.com/v1/covid19', {
                     params: { country: country },
-                    headers: { 'X-Api-Key': '8sTJ8+I390xOnUlT3GjIIg==L5FJkyLAlF4sYitD' }
+                    headers: { 'X-Api-Key': process.env.NINJAS_API_KEY }
                 });
-        
+
                 if (response.status === 200) {
                     const data = response.data.map(item => {
                         const casesArray = Object.entries(item.cases).map(([date, caseDetails]) => ({
-                          date,
-                          numTotal: caseDetails.total,  // Renaming "total" to "numTotal"
-                          numNew: caseDetails.new       // Renaming "new" to "numNew"
+                            date,
+                            numTotal: caseDetails.total,  // Renaming "total" to "numTotal"
+                            numNew: caseDetails.new       // Renaming "new" to "numNew"
                         }));
                         return {
-                          ...item,
-                          cases: casesArray
+                            ...item,
+                            cases: casesArray
                         };
-                      });
+                    });
 
                     //   console.log(data);
-                    res.status(200).json({stats: data});
+                    res.status(200).json({ stats: data });
                 } else {
                     res.status(response.status).json({ message: "Error retrieving data", details: response.data });
                 }
@@ -393,8 +393,8 @@ client.connect()
                     console.error('Error:', error.message);
                     res.status(500).json({ message: "Error making request to API", error: error.message });
                 }
-            }
-        });
+            }
+        });
 
         server.get('/news', async (req, res) => {
             const country = "us"
@@ -404,17 +404,17 @@ client.connect()
                 const response = await axios.get('https://newsapi.org/v2/top-headlines', {
                     params: { apiKey: NEWS_API_KEY, country: country, category: category },
                 });
-        
+
                 if (response.status === 200) {
                     const articlesArray = response.data.articles.filter(article => {
                         const { title, description, urlToImage, content } = article;
                         return title != removed && description != removed && urlToImage != removed && content != removed;
                     });
-        
-                      data =  {
+
+                    data = {
                         ...response.data,
                         articles: articlesArray
-                      };
+                    };
                     //   console.log(data);
                     res.status(200).json(data);
                 } else {
@@ -435,19 +435,19 @@ client.connect()
                     console.error('Error:', error.message);
                     res.status(500).json({ message: "Error making request to API", error: error.message });
                 }
-            }
+            }
         });
 
         server.get('/nearby-hospitals', async (req, res) => {
             const ipInfoToken = process.env.IP_INFO_TOKEN;
             const GOOGLE_API_KEY = process.env.GOOGLE_API_KEY;
-        
+
             try {
                 const locResponse = await axios.get(`https://ipinfo.io?token=${ipInfoToken}`);
                 const location = locResponse.data.loc;
-                const radius = 8000;  
+                const radius = 8000;
                 const type = 'hospital';
-        
+
                 const placesResponse = await axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json`, {
                     params: {
                         location,
@@ -456,29 +456,29 @@ client.connect()
                         key: GOOGLE_API_KEY
                     }
                 });
-        
+
                 const hospitals = placesResponse.data.results.map(place => {
                     const photoReference = place.photos && place.photos.length > 0 ? place.photos[0].photo_reference : null;
                     const openHours = place.opening_hours ? (place.opening_hours.open_now ? "Open now" : "Closed") : "Not available";
                     const imageUrl = photoReference ? `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photoReference}&key=${GOOGLE_API_KEY}` : 'No image available';
-        
+
                     const numberOfBeds = Math.floor(Math.random() * 100);
                     const vaccineAvailable = Math.random() > 0.5 ? 'Yes' : 'No';
                     const locationString = `${place.geometry.location.lat}, ${place.geometry.location.lng}`;
                     const googleMapsLink = `https://www.google.com/maps/dir/?api=1&destination=${place.geometry.location.lat},${place.geometry.location.lng}&travelmode=driving`;
-        
+
                     return {
                         name: place.name,
                         numberOfBeds: numberOfBeds,
                         vaccineAvailable: vaccineAvailable,
                         location: locationString,
-                        address: place.vicinity, 
-                        openStatus: openHours, 
+                        address: place.vicinity,
+                        openStatus: openHours,
                         imageUrl: imageUrl,
-                        googleMapsLink: googleMapsLink  
+                        googleMapsLink: googleMapsLink
                     };
                 });
-        
+
                 // console.log(hospitals);
                 res.json(hospitals);
             } catch (error) {
@@ -492,8 +492,8 @@ client.connect()
             const googleApiKey = process.env.GOOGLE_API_KEY;
 
             const { radius } = req.body;
-            
-          
+
+
             try {
                 const locResponse = await axios.get(`https://ipinfo.io?token=${ipInfoToken}`);
                 const location = locResponse.data.loc;
@@ -510,15 +510,15 @@ client.connect()
                         fields
                     }
                 });
-          
-                const pharmacies = placesResponse.data.results.map(pharmacy => {            
+
+                const pharmacies = placesResponse.data.results.map(pharmacy => {
                     const vaccineAvailable = Math.random() > 0.5 ? 'Yes' : 'No';
 
                     return {
                         name: pharmacy.name,
                         vaccineAvailable: vaccineAvailable,
                         location: pharmacy.geometry.location,
-                        address: pharmacy.formatted_address || 'Not available', 
+                        address: pharmacy.formatted_address || 'Not available',
                         phoneNumber: pharmacy.formatted_phone_number || 'Not available'
                     };
                 });
