@@ -13,7 +13,7 @@ server.use(express.json());
 server.use(cors());
 
 const { MongoClient, ServerApiVersion } = require('mongodb');
-const uri = "mongodb+srv://tvarshne:44332211%40Tanishq@maincluster.c6exvxp.mongodb.net/?retryWrites=true&w=majority&appName=MainCluster";
+const uri = process.env.MONGODB_URI;
 const client = new MongoClient(uri, {
     serverApi: {
         version: ServerApiVersion.v1,

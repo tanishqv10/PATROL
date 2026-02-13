@@ -28,6 +28,8 @@ android {
         
         buildConfigField("String", "IPINFO_TOKEN", "\"${localProperties["IPINFO_TOKEN"]}\"")
         buildConfigField("String", "NEWS_API_KEY", "\"${localProperties["NEWS_API_KEY"]}\"")
+
+        manifestPlaceholders["GOOGLE_MAPS_API_KEY"] = localProperties["GOOGLE_MAPS_API_KEY"] as String
     }
 
     buildTypes {
